@@ -16,7 +16,7 @@ h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;margin:0
 nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;justify-content:center;gap:22px;padding:12px 16px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
 nav a{color:var(--ink);text-decoration:none}
 .hero{text-align:center;padding:64px 20px 56px;border-bottom:1px solid var(--line)}
-.mono{width:74px;height:74px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:0 auto 22px;font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold);outline:1px solid var(--gold);outline-offset:4px}
+.mono{width:74px;height:74px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;gap:1px;line-height:1;margin:0 auto 22px;font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold);outline:1px solid var(--gold);outline-offset:4px}
 .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--maroon)}
 .names{font-family:'Great Vibes',cursive;color:var(--maroon);font-size:clamp(46px,13vw,84px);line-height:1.1;margin:14px 0}
 .names span{display:block;font-size:.45em;color:var(--gold)}
@@ -56,10 +56,16 @@ input[type=text],input[type=tel],textarea,select{width:100%;padding:11px 12px;bo
 .msg{margin-top:16px;padding:14px;border-radius:3px;text-align:center;display:none}
 .msg.ok{display:block;border:1px solid var(--ok);color:var(--ok)}.msg.err{display:block;border:1px solid var(--maroon);color:var(--maroon)}
 footer{text-align:center;padding:30px 18px 50px;color:var(--mute);font-family:'Cormorant Garamond',serif;font-size:20px;border-top:1px solid var(--line)}
+
+.invc{max-width:560px;margin:0 auto;text-align:center;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--maroon);border-radius:4px;padding:40px 26px}
+.invc .lead,.invc .close{font-family:'Cormorant Garamond',serif;font-size:20px;line-height:1.55}
+.invc .body{margin:16px 0}
+.inames{font-family:'Great Vibes',cursive;color:var(--maroon);font-size:clamp(38px,10vw,54px);line-height:1.15;margin:12px 0}
+.inames span{display:block;font-size:.5em;color:var(--gold)}
 </style>
 </head>
 <body>
-<nav><a href="#events">Events</a><a href="#rsvp">RSVP</a></nav>
+<nav><a href="#invite">Invitation</a><a href="#events">Events</a><a href="#rsvp">RSVP</a></nav>
 
 <header class="hero">
   <div class="mono">R<span style="font-size:.7em;margin:0 1px">&amp;</span>Y</div>
@@ -70,6 +76,8 @@ footer{text-align:center;padding:30px 18px 50px;color:var(--mute);font-family:'C
   <div class="tag">Come as you are, leave with a full heart.</div>
   <a class="btn" href="#rsvp">RSVP</a>
 </header>
+
+<section id="invite"><div class="invc" id="invbody"></div></section>
 
 <section id="events">
   <h2>Our Celebrations</h2><div class="orn"></div>
@@ -186,6 +194,14 @@ document.getElementById("go").onclick=async function(){
   try{await navigator.clipboard.writeText(txt);extra+=" Your RSVP was copied, so please paste it to us."}catch(e){}
   show("err","We couldn’t save your RSVP online."+extra);
 };
+
+var NM='<div class="inames">Ramyanee<span>and</span>Maj. Yash Kirti</div>';
+var TX={
+ all:'<div class="lead">Together with our families,<br>we joyfully invite you<br>to celebrate love, tradition and new beginnings<br>at the wedding of</div>'+NM+'<div class="body">Join us in Jorhat and Lucknow, from the 17th to the 24th of January 2027, for a week of ceremonies, music and togetherness.</div><div class="orn"></div><div class="close">Your presence will make our celebration more meaningful and our joy complete. We look forward to creating beautiful memories with you.</div>',
+ "19th":'<div class="lead">Together with our families,<br>we joyfully invite you<br>to the wedding celebrations of</div>'+NM+'<div class="body">on the 19th of January 2027,<br>at Puroni Bheti Tea Estate, Jorhat, Assam.<br><br>Join us for the Juroon ceremony in the morning, followed by the Reception and Muhurtam in the afternoon and evening.</div><div class="orn"></div><div class="close">Your presence will make our celebration more meaningful and our joy complete.</div>',
+ lucknow:'<div class="lead">Together with our families,</div>'+NM+'<div class="lead">request the pleasure of your company<br>at their wedding reception</div><div class="body">on the 24th of January 2027, from 7:30 PM onwards,<br>at Greco-Roman Hall, Surya Officers Institute,<br>Lucknow Cantonment.</div><div class="orn"></div><div class="close">Your presence will make our celebration complete.</div>'
+};
+document.getElementById("invbody").innerHTML=TX[INVITE];
 </script>
 </body>
 </html>
